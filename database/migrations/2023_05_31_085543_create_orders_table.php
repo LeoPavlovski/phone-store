@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('orders', function (Blueprint $table) {
+            $table->uuid("order_id");
+            $table->decimal("subtotal");
+            $table->decimal("price");
+            $table->decimal("tax");
+            $table->integer("quantity");
+            $table->foreignId("phone_id")->constrained("phones");
+            $table->foreignId("user_id")->constrained("users");
             $table->timestamps();
             $table->softDeletes();
         });
+
     }
 
     /**
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('orders');
     }
 };
