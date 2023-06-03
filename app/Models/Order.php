@@ -16,7 +16,8 @@ class Order extends Model
         'user_id',
         'quantity',
         'price',
-        'tax'
+        'tax',
+        "subtotal"
     ];
     public function phone()
     {
